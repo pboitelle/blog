@@ -1,0 +1,26 @@
+version: "3.3"
+
+services:
+  composer:
+    image: composer:2.1.9
+    entrypoint: composer
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_USER=symfony
+      - POSTGRES_PASSWORD=8164
+      - POSTGRES_DB=symfony
+    volumes:
+      - ./database:/var/lib/postgresql/data:rw
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    depends_on:
+      - db

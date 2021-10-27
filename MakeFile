@@ -1,0 +1,13 @@
+.PHONY: start stop
+
+start:
+    docker-compose --env-file=".env.local" up -d
+
+stop:
+    docker compose down
+
+debug-router:
+    symfony console debug:router
+
+validate-entity:
+    symfony doctrine:schema:validate
